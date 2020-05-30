@@ -1,2 +1,2 @@
 # MyClicker
- Clicker starts by click "Ctrl+Shift+1"
+ Clicker starts and of by click "Ctrl+Shift+1"
