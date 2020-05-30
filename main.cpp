@@ -1,12 +1,30 @@
 #include <windows.h>
 #include <iostream>
- 
+bool isActivated = 0;
+
 LRESULT CALLBACK LLKeyProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
+    PROCESS_INFORMATION procInfo;
     if (GetAsyncKeyState(162) == -32768 
     && GetAsyncKeyState(160) == -32768 
     && GetAsyncKeyState(49) == -32767)
-        std::cout << "success\n";
+    {
+        if (!isActivated)
+        {
+            STARTUPINFO startupInfo;
+            ZeroMemory(&startupInfo, sizeof(STARTUPINFO));
+            std::string str("clicker.exe");
+            startupInfo.cb = sizeof(STARTUPINFO);
+            CreateProcess(NULL, (LPSTR)str.c_str() , NULL, NULL, 0, 
+            NULL, NULL, NULL, &startupInfo, &procInfo);
+            isActivated = 1;
+        }
+        else
+        {
+            TerminateProcess(procInfo.hProcess, NO_ERROR);
+            isActivated = 0;
+        }
+    }
     return 0;
 }
  
