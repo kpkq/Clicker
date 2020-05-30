@@ -3,16 +3,11 @@
  
 LRESULT CALLBACK LLKeyProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
-    if(nCode == HC_ACTION)
-    {
-        DWORD vk = ((LPKBDLLHOOKSTRUCT)lParam)->vkCode;
-        std::cout << "key pressed : " << vk << std::endl;
-        if(vk == 0x1b)
-        {
-            PostQuitMessage(0);
-        }
-    }
-    return CallNextHookEx(NULL, nCode, wParam, lParam);
+    if (GetAsyncKeyState(162) == -32768 
+    && GetAsyncKeyState(160) == -32768 
+    && GetAsyncKeyState(49) == -32767)
+        std::cout << "success\n";
+    return 0;
 }
  
 int main()
